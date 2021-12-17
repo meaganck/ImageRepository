@@ -1,0 +1,16 @@
+html    
+    head
+        title Image Repo 
+    body 
+    div#main
+        h1 Welcome to the Image Repository
+        form(action="/fileupload" method="post" enctype="multipart/form-data")
+            input(type="file" accept="image/*" name="imageFile")
+            input(type="submit" value="Upload")
+    div#displayImages
+        if (images.length > 0)
+        h2 Images
+            each imagePath in images 
+                p Here is an image: (#{imagePath})
+                img(src=imagePath)
+            
