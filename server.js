@@ -11,7 +11,7 @@ const multerStorage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
       const ext = file.mimetype.split("/")[1];
-      cb(null, `images/admin-${file.fieldname}-${Date.now()}.${ext}`);
+      cb(null, `images/${file.fieldname}-${Date.now()}.${ext}`);
     },
 });
 
@@ -36,6 +36,18 @@ const mc = require("mongodb").MongoClient;
 
 let db;
 let imageNames = [];
+
+// Read current images in views/images
+var files = fs.readdirSync("./views/images");
+files.forEach( function (file) {
+    // Checks for JPEG and PNG files in folder
+    if ((path.extname(file).toUpperCase() === '.JPEG') || (path.extname(file).toUpperCase() === '.PNG')){
+        // Gets path name to file
+        let pathName = "images/" + path.basename(file);
+        // Add to array
+        imageNames.push(pathName);
+    }
+});
 
 app.use(express.urlencoded({extended: true})); 
 app.set("view engine", "pug");
