@@ -1,16 +1,25 @@
 html    
     head
         title Image Repo 
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    style
+        include style.css 
     body 
-    div#main
-        h1 Welcome to the Image Repository
-        form(action="/fileupload" method="post" enctype="multipart/form-data")
-            input(type="file" accept="image/*" name="imageFile")
-            input(type="submit" value="Upload")
-    div#displayImages
-        if (images.length > 0)
-        h2 Images
-            each imagePath in images 
-                p Here is an image: (#{imagePath})
-                img(src=imagePath)
+        
+        div#main(class="center") 
+            h1 Welcome to the Image Repository
+            p If you would like to add to this repository, please select a an image file (PNG or JPEG), and submit!
+            br
+            form(action="/fileupload" method="post" enctype="multipart/form-data")
+                input(type="file" accept="image/*" name="imageFile")
+                input(type="submit" value="Upload")
+        div#displayImages(class="center")
+            if (images.length > 0)
+                h2 Images
+                each imagePath in images 
+                    img(src=imagePath)
+                    p(class="caption") #{imagePath}
+                    br
             
